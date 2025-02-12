@@ -1,5 +1,6 @@
 package com.kt.pet_server.model;
 
+import com.kt.pet_server.dto.request.member.MemberUpdateRequest;
 import com.kt.pet_server.global.base.BaseEntity;
 import com.kt.pet_server.model.enums.MemberStatus;
 
@@ -38,5 +39,13 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false)
     private MemberStatus status;
-    
+ 
+    public void update(MemberUpdateRequest request) {
+        this.name = request.name();
+        this.contact = request.contact();
+    }
+
+    public void resetPassword(String encodedPassword) {
+        this.password = encodedPassword;
+    }
 }

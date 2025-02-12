@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class BaseResponse<T> {
 
-    private final String isSuccess;
+    private final String status;
         
     private final String message;
 
