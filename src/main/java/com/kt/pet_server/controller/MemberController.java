@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.pet_server.dto.request.member.MemberSignupRequest;
+import com.kt.pet_server.dto.request.member.MemberUpdatePasswordRequest;
 import com.kt.pet_server.dto.request.member.MemberUpdateRequest;
 import com.kt.pet_server.dto.response.member.MemberIdResponse;
 import com.kt.pet_server.dto.response.member.MemberInquiryResponse;
-import com.kt.pet_server.dto.response.member.MemberResetPasswordResponse;
 import com.kt.pet_server.dto.response.member.MemberSignupResponse;
 import com.kt.pet_server.global.base.BaseResponse;
 import com.kt.pet_server.service.MemberService;
@@ -82,15 +81,16 @@ public class MemberController {
         );
     }
 
-    @Operation(summary = "회원 비밀번호 초기화", description = "회원 비밀번호를 초기화합니다.")
-    @PutMapping("/reset")
-    public BaseResponse<MemberResetPasswordResponse> resetPassword(
-        @RequestParam String email
+    @Operation(summary = "비밀 번호 변경", description = "비밀번호를 변경합니다.")
+    @PutMapping("/password")
+    public BaseResponse<MemberIdResponse> updatePassword(
+        @RequestBody MemberUpdatePasswordRequest request,
+        HttpSession session
     ) {
+        Long sessionMemberId = (Long) session.getAttribute("memberId");
         
         return BaseResponse.onSuccess(
-            "비밀번호 초기화 성공", memberService.resetPassword(email)
+            "비밀번호 변경 성공", memberService.updatePassword(sessionMemberId, request)
         );
     }
-    
 }

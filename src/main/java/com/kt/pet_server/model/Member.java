@@ -45,7 +45,7 @@ public class Member extends BaseEntity {
         this.contact = request.contact();
     }
 
-    public void resetPassword(String encodedPassword) {
+    public void updatePassword(String encodedPassword) {
         this.password = encodedPassword;
     }
 }

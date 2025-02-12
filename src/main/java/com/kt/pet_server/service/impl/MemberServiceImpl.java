@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.pet_server.dto.request.member.MemberSignupRequest;
+import com.kt.pet_server.dto.request.member.MemberUpdatePasswordRequest;
 import com.kt.pet_server.dto.request.member.MemberUpdateRequest;
 import com.kt.pet_server.dto.response.member.MemberIdResponse;
 import com.kt.pet_server.dto.response.member.MemberInquiryResponse;
-import com.kt.pet_server.dto.response.member.MemberResetPasswordResponse;
 import com.kt.pet_server.dto.response.member.MemberSignupResponse;
 import com.kt.pet_server.global.exception.CustomException;
 import com.kt.pet_server.model.Member;
@@ -66,14 +66,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberResetPasswordResponse resetPassword(String email) {
-        Member member = memberRepository.findByEmail(email)
-            .orElseThrow(() -> new CustomException("존재하지 않는 이메일입니다."));
-       
-        member.resetPassword(passwordEncoder.encode("1234"));
+    public MemberIdResponse updatePassword(Long memberId, MemberUpdatePasswordRequest request) {
+        Member member = checkSessionMemberId(memberId);
+        if (!passwordEncoder.matches(request.currentPassword(), member.getPassword())) {
+            throw new CustomException("현재 비밀번호가 일치하지 않습니다.");
+        }
 
-        return MemberResetPasswordResponse.from("1234");
-        
+        String password = request.newPassword();
+        member.updatePassword(passwordEncoder.encode(password));
+        return MemberIdResponse.from(member.getId());
     }
 
     private Member checkSessionMemberId(Long sessionMemberId) {
