@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberIdResponse withdraw(final Long memberId) {
 
         Member member = checkSessionMemberId(memberId);
-        member.delete();
+        memberRepository.delete(member);
 
         return MemberIdResponse.from(member.getId());
     }

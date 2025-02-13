@@ -16,6 +16,7 @@ import com.kt.pet_server.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -30,7 +31,7 @@ public class AuthController {
     @Tag(name = "로그인", description = "로그인 API")
     @PostMapping
     public BaseResponse<AuthLoginResponse> login(
-        @RequestBody AuthLoginRequest request,
+        @Valid @RequestBody AuthLoginRequest request,
         HttpSession session
     ) {
         AuthLoginResponse response = authService.login(request);
@@ -42,7 +43,7 @@ public class AuthController {
     @Operation(summary = "회원 비밀번호 초기화", description = "회원 비밀번호를 초기화합니다.")
     @PutMapping("/reset")
     public BaseResponse<AuthResetPasswordResponse> resetPassword(
-        @RequestParam String email
+        @RequestParam(value="email") String email
     ) {
         return BaseResponse.onSuccess(
             "비밀번호 초기화 성공", authService.resetPassword(email)
