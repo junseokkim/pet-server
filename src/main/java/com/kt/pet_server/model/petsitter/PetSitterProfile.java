@@ -46,15 +46,15 @@ public class PetSitterProfile extends BaseEntity {
     private String profileUrl;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", unique = true)
+    @JoinColumn
     private Member member;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", unique = true)
+    @JoinColumn
     private Address address;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "certificate_id", unique = true)
+    @JoinColumn
     private Certificate certificate;
 
 }

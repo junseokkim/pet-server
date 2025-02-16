@@ -1,5 +1,8 @@
 package com.kt.pet_server.model.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AvailableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +30,9 @@ public class AvailableTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private PetSitterService petSitterService;
+
+    @Column(nullable = false)
+    private LocalDate availableDate;
 
     @Column(nullable = false)
     private LocalTime startTime;

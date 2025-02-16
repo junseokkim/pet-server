@@ -31,13 +31,13 @@ public class Schedule extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-    private PetSitterService service;
+    private PetSitterService petSitterService;
 
     @Column(nullable = false)
-    private LocalDateTime startAt;
+    private LocalDateTime startTime;
 
     @Column(nullable = false)
-    private LocalDateTime endAt;
+    private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

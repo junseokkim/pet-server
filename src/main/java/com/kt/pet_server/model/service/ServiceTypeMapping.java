@@ -28,7 +28,7 @@ public class ServiceTypeMapping {
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private ServiceType name;
+    private ServiceType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn

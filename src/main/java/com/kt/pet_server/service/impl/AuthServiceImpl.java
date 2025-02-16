@@ -44,4 +44,13 @@ public class AuthServiceImpl implements AuthService {
         return AuthResetPasswordResponse.from("1234");
         
     }
+
+    @Override
+    public Member getMember(Long memberId) {
+        if (memberId == null) {
+            throw new CustomException("로그인을 해주세요");
+        }
+
+        return memberRepository.getMember(memberId);
+    }
 }
