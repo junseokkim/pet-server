@@ -8,7 +8,7 @@ import com.kt.pet_server.dto.request.auth.AuthLoginRequest;
 import com.kt.pet_server.dto.response.auth.AuthLoginResponse;
 import com.kt.pet_server.dto.response.auth.AuthResetPasswordResponse;
 import com.kt.pet_server.global.exception.CustomException;
-import com.kt.pet_server.model.Member;
+import com.kt.pet_server.model.member.Member;
 import com.kt.pet_server.repository.MemberRepository;
 import com.kt.pet_server.service.AuthService;
 

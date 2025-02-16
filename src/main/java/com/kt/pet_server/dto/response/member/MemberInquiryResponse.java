@@ -1,6 +1,6 @@
 package com.kt.pet_server.dto.response.member;
 
-import com.kt.pet_server.model.Member;
+import com.kt.pet_server.model.member.Member;
 
 public record  MemberInquiryResponse(
     Long memberId,

@@ -1,6 +1,6 @@
 package com.kt.pet_server.dto.response.auth;
 
-import com.kt.pet_server.model.Member;
+import com.kt.pet_server.model.member.Member;
 
 public record AuthLoginResponse(
     Long memberId,

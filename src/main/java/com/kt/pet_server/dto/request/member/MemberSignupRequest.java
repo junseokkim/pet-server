@@ -1,6 +1,6 @@
 package com.kt.pet_server.dto.request.member;
 
-import com.kt.pet_server.model.Member;
+import com.kt.pet_server.model.member.Member;
 import com.kt.pet_server.model.enums.MemberStatus;
 
 import jakarta.validation.constraints.Email;

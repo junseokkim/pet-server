@@ -11,7 +11,7 @@ import com.kt.pet_server.dto.response.member.MemberIdResponse;
 import com.kt.pet_server.dto.response.member.MemberInquiryResponse;
 import com.kt.pet_server.dto.response.member.MemberSignupResponse;
 import com.kt.pet_server.global.exception.CustomException;
-import com.kt.pet_server.model.Member;
+import com.kt.pet_server.model.member.Member;
 import com.kt.pet_server.repository.MemberRepository;
 import com.kt.pet_server.service.MemberService;
 
