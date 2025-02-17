@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record CodeGroupUpdateRequest(
     @NotBlank(message = "코드 그룹을 입력해주세요.")
-    String codeGroup,
+    String codeGroupId,
     @NotBlank(message = "코드 그룹 이름을 입력해주세요.")
     String codeGroupName,
     @NotNull(message = "코드 그룹 설명을 입력해주세요.")
@@ -15,7 +15,7 @@ public record CodeGroupUpdateRequest(
 
     public static CodeGroup toEntity(CodeGroupUpdateRequest request) {
         return CodeGroup.builder()
-            .groupId(request.codeGroup())
+            .groupId(request.codeGroupId())
             .groupName(request.codeGroupName())
             .description(request.codeGroupDescription())
             .build();

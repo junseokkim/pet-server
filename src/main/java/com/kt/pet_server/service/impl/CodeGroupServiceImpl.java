@@ -7,8 +7,9 @@ import com.kt.pet_server.dto.response.code_group.CodeGroupListResponse;
 import com.kt.pet_server.global.exception.CustomException;
 import com.kt.pet_server.model.code.CodeGroup;
 import com.kt.pet_server.repository.code.CodeGroupRepository;
+import com.kt.pet_server.service.AuthService;
 import com.kt.pet_server.service.CodeGroupService;
-import jakarta.websocket.Session;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CodeGroupServiceImpl implements CodeGroupService {
 
     private final CodeGroupRepository codeGroupRepository;
+    private final AuthService authService;
 
     @Override
-    public CodeGroupIdResponse createCodeGroup(Session session, CodeGroupUpdateRequest request) {
+    public CodeGroupIdResponse createCodeGroup(Long sessionMemberId, CodeGroupUpdateRequest request) {
 
-        // TODO: 관리자 권한 확인
-
-        if (codeGroupRepository.existsByGroupId(request.codeGroup())) {
+        authService.checkAdmin(sessionMemberId);
+        if (codeGroupRepository.existsByGroupId(request.codeGroupId())) {
             throw new CustomException("이미 존재하는 코드 그룹입니다.");
         }
         CodeGroup codeGroup = CodeGroupUpdateRequest.toEntity(request);
@@ -35,15 +36,10 @@ public class CodeGroupServiceImpl implements CodeGroupService {
 
     @Override
     @Transactional
-    public CodeGroupIdResponse updateCodeGroup(Session session, String groupId, CodeGroupUpdateRequest request) {
+    public CodeGroupIdResponse updateCodeGroup(Long sessionMemberId, CodeGroupUpdateRequest request) {
 
-        // TODO: 관리자 권한 확인
-        CodeGroup codeGroup = codeGroupRepository.getCodeGroup(groupId);
-
-        if (codeGroupRepository.existsByGroupId(request.codeGroup())
-            && !codeGroup.getGroupId().equals(request.codeGroup())) {
-            throw new CustomException("이미 존재하는 코드 그룹 ID입니다.");
-        }
+        authService.checkAdmin(sessionMemberId);
+        CodeGroup codeGroup = codeGroupRepository.getCodeGroup(request.codeGroupId());
 
         if (codeGroupRepository.existsByGroupName(request.codeGroupName())
             && !codeGroup.getGroupName().equals(request.codeGroupName())) {
@@ -55,9 +51,9 @@ public class CodeGroupServiceImpl implements CodeGroupService {
     }
 
     @Override
-    public CodeGroupIdResponse deleteCodeGroup(Session session, String groupId) {
+    public CodeGroupIdResponse deleteCodeGroup(Long sessionMemberId, String groupId) {
 
-        // TODO: 관리자 권한 확인
+        authService.checkAdmin(sessionMemberId);
         CodeGroup codeGroup = codeGroupRepository.getCodeGroup(groupId);
 
         if (!codeGroup.getCodeDetails().isEmpty()) {
@@ -68,14 +64,19 @@ public class CodeGroupServiceImpl implements CodeGroupService {
     }
 
     @Override
-    public CodeGroupListResponse<CodeGroupInquiryResponse> getCodeGroupList(Session session) {
+    public CodeGroupListResponse<CodeGroupInquiryResponse> getCodeGroupList(Long sessionMemberId) {
 
-        // TODO: 관리자 권한 확인
+        authService.checkAdmin(sessionMemberId);
 
         List<CodeGroup> codeGroups = codeGroupRepository.findAll();
 
         return CodeGroupListResponse.from(
             codeGroups.stream().map(CodeGroupInquiryResponse::from).toList()
         );
+    }
+
+    @Override
+    public CodeGroup getCodeGroup(String groupId) {
+        return codeGroupRepository.getCodeGroup(groupId);
     }
 }

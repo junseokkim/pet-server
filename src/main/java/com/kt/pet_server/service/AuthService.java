@@ -10,4 +10,5 @@ public interface AuthService {
     AuthLoginResponse login(final AuthLoginRequest request);
     AuthResetPasswordResponse resetPassword(final String email);
     Member getMember(final Long memberId);
+    void checkAdmin(final Long memberId);
 }

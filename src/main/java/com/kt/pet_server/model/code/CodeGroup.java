@@ -13,7 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -37,7 +36,6 @@ public class CodeGroup extends BaseEntity {
     private List<CodeDetail> codeDetails = new ArrayList<>();
 
     public void update(CodeGroupUpdateRequest request) {
-        this.groupId = request.codeGroup();
         this.groupName = request.codeGroupName();
         this.description = request.codeGroupDescription();
     }
@@ -47,5 +45,9 @@ public class CodeGroup extends BaseEntity {
             this.codeDetails = new ArrayList<>();
         }
         this.codeDetails.add(codeDetail);
+    }
+
+    public void removeCodeDetail(CodeDetail codeDetail) {
+        this.codeDetails.remove(codeDetail);
     }
 }

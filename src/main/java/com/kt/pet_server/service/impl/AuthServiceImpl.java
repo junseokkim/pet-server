@@ -1,5 +1,6 @@
 package com.kt.pet_server.service.impl;
 
+import com.kt.pet_server.repository.code.CodeDetailRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,9 @@ public class AuthServiceImpl implements AuthService {
             throw new CustomException("이메일 또는 비밀번호가 올바르지 않습니다.");
         }
 
-        return AuthLoginResponse.from(member);
+        Boolean isAdmin = member.getRole().getCodeDetailName().equals("관리자");
+
+        return AuthLoginResponse.from(member, isAdmin);
     }
 
     @Override
@@ -52,5 +55,15 @@ public class AuthServiceImpl implements AuthService {
         }
 
         return memberRepository.getMember(memberId);
+    }
+
+    @Override
+    public void checkAdmin(Long memberId) {
+
+        Member member = getMember(memberId);
+
+        if (!member.getRole().getCodeDetailName().equals("관리자")) {
+            throw new CustomException("관리자 권한이 필요합니다.");
+        }
     }
 }

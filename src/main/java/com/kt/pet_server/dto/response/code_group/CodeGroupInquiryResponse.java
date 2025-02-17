@@ -3,7 +3,7 @@ package com.kt.pet_server.dto.response.code_group;
 import com.kt.pet_server.model.code.CodeGroup;
 
 public record CodeGroupInquiryResponse(
-    String codeGroup,
+    String codeGroupId,
     String codeGroupName,
     String codeGroupDescription
 ) {

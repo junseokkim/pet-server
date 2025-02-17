@@ -1,5 +1,6 @@
 package com.kt.pet_server.service.impl;
 
+import com.kt.pet_server.service.CodeDetailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CodeDetailService codeDetailService;
 
     @Override
     public MemberSignupResponse signup(final MemberSignupRequest request) {
@@ -32,7 +34,9 @@ public class MemberServiceImpl implements MemberService {
         }
 
         String encodedPassword = passwordEncoder.encode(request.password());
-        Member member = memberRepository.save(request.toEntity(encodedPassword));
+        Member member = memberRepository.save(
+            request.toEntity(encodedPassword, codeDetailService.getCodeDetailByName("일반 사용자"))
+        );
 
         return MemberSignupResponse.from(member.getId());
     }
@@ -84,6 +88,8 @@ public class MemberServiceImpl implements MemberService {
 
         return memberRepository.getMember(sessionMemberId);
     }
+
+
     
     
 }

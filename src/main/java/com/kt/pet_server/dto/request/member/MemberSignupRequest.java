@@ -1,5 +1,6 @@
 package com.kt.pet_server.dto.request.member;
 
+import com.kt.pet_server.model.code.CodeDetail;
 import com.kt.pet_server.model.member.Member;
 import com.kt.pet_server.model.enums.MemberStatus;
 
@@ -17,13 +18,14 @@ public record MemberSignupRequest(
     String contact
 ) {
 
-    public Member toEntity(String encodedPassword) {
+    public Member toEntity(String encodedPassword, CodeDetail role) {
         return Member.builder()
             .email(email)
             .password(encodedPassword)
             .name(name)
             .contact(contact)
             .status(MemberStatus.ACTIVE)
+            .role(role)
             .build();
     }
 
