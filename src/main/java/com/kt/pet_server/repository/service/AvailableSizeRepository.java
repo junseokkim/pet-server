@@ -1,4 +1,4 @@
-package com.kt.pet_server.repository;
+package com.kt.pet_server.repository.service;
 
 import com.kt.pet_server.model.service.AvailableSizeMapping;
 import org.springframework.data.jpa.repository.JpaRepository;

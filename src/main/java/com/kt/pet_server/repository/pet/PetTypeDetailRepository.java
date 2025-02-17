@@ -1,4 +1,4 @@
-package com.kt.pet_server.repository;
+package com.kt.pet_server.repository.pet;
 
 import com.kt.pet_server.global.exception.CustomException;
 import com.kt.pet_server.model.pet.PetTypeDetail;

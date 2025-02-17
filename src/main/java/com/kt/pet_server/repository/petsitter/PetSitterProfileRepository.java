@@ -1,4 +1,4 @@
-package com.kt.pet_server.repository;
+package com.kt.pet_server.repository.petsitter;
 
 import com.kt.pet_server.global.exception.CustomException;
 import java.util.Optional;
