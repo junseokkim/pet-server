@@ -12,5 +12,5 @@ public interface PetSitterServiceService {
     ServiceListResponse<ServiceSummaryResponse> getMyServices(Long sessionMemberId);
     ServiceListResponse<ServiceSummaryResponse> getServices(Long petSitterId);
     ServiceListResponse<ServiceSummaryResponse> getMonthlyServices(String year, String month);
-    ServiceDetailResponse getService(Long serviceId);
+    ServiceDetailResponse getService(Long sessionMemberId, Long serviceId);
 }

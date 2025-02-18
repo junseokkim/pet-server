@@ -136,7 +136,7 @@ public class CodeDetailServiceImpl implements CodeDetailService {
 
     private void validateSortOrder(CodeGroup codeGroup, int sortOrder) {
         List<CodeDetail> groupCodeDetails = codeDetailRepository.findAllByCodeGroup(codeGroup);
-        if (sortOrder < 1 || sortOrder > groupCodeDetails.size()) {
+        if (sortOrder < 1 || sortOrder > groupCodeDetails.size() + 1) {
             throw new CustomException("정렬 순서는 1 이상이며 현재 코드 개수보다 클 수 없습니다.");
         }
     }

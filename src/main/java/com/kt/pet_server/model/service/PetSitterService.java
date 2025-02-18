@@ -2,7 +2,6 @@ package com.kt.pet_server.model.service;
 
 import com.kt.pet_server.global.base.BaseEntity;
 import com.kt.pet_server.model.petsitter.PetSitterProfile;
-import com.kt.pet_server.model.schedule.Schedule;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,15 +47,11 @@ public class PetSitterService extends BaseEntity {
     @JoinColumn
     private PetSitterProfile petSitter;
 
-    @Builder.Default
-    @Setter
+    // 1시간 단위 슬롯
     @OneToMany(mappedBy = "petSitterService", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AvailableTime> availableTimes = new ArrayList<>();
-
-    @Builder.Default
     @Setter
-    @OneToMany(mappedBy = "petSitterService", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Schedule> schedules = new ArrayList<>();
+    @Builder.Default
+    private List<TimeSlot> timeSlots = new ArrayList<>();
 
     @Builder.Default
     @Setter

@@ -1,22 +1,24 @@
 package com.kt.pet_server.dto.response.service;
 
+import com.kt.pet_server.model.service.TimeSlot;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import com.kt.pet_server.model.service.AvailableTime;
 import java.time.LocalTime;
 
 public record AvailableTimeResponse(
-    LocalDate availableDate,
+    Long timeSlotId,
+    LocalDate date,
     LocalTime startTime,
-    LocalTime endTime
+    LocalTime endTime,
+    boolean isBooked
 ) {
 
-    public static AvailableTimeResponse from(AvailableTime availableTime) {
+    public static AvailableTimeResponse from(TimeSlot timeSlot) {
         return new AvailableTimeResponse(
-            availableTime.getAvailableDate(),
-            availableTime.getStartTime(),
-            availableTime.getEndTime()
+            timeSlot.getId(),
+            timeSlot.getDate(),
+            timeSlot.getStartTime(),
+            timeSlot.getEndTime(),
+            timeSlot.getIsBooked()
         );
     }
 }

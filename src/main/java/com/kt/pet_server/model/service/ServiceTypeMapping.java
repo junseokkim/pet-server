@@ -1,5 +1,6 @@
 package com.kt.pet_server.model.service;
 
+import com.kt.pet_server.global.base.BaseEntity;
 import com.kt.pet_server.model.enums.ServiceType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ServiceTypeMapping {
+public class ServiceTypeMapping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

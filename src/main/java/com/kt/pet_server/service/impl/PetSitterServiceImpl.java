@@ -79,12 +79,17 @@ public class PetSitterServiceImpl implements PetSitterService {
 
         List<String> petTypes = availablePetTypeRepository.findAllByPetSitter(petSitterProfile).stream()
             .map(AvailablePetType::getPetType)
-            .map(PetType::name)
+            .map(PetType::getDescription)
             .toList();
 
         return PetSitterDetailResponse.from(
             petSitterProfile, petTypes, (Objects.equals(member.getId(), petSitterProfile.getMember().getId()))
         );
+    }
+
+    @Override
+    public PetSitterProfile loadPetSitterProfile(Long petSitterId) {
+        return petSitterRepository.getPetSitterProfile(petSitterId);
     }
 
 

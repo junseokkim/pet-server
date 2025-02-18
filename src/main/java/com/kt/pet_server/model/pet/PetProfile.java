@@ -2,6 +2,7 @@ package com.kt.pet_server.model.pet;
 
 import com.kt.pet_server.global.base.BaseEntity;
 
+import com.kt.pet_server.model.member.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,5 +38,9 @@ public class PetProfile extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-    private PetTypeDetail petBreed;
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private PetTypeDetail petTypeDetail;
 }

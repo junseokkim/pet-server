@@ -13,4 +13,5 @@ public interface PetSitterService {
     PetSitterSummaryResponse getMyProfile(Long sessionMemberId);
     PetSitterListResponse<PetSitterSummaryResponse> getProfiles();
     PetSitterDetailResponse getProfile(Long sessionMemberId, Long petSitterId);
+    PetSitterProfile loadPetSitterProfile(Long petSitterId);
 }

@@ -1,5 +1,6 @@
 package com.kt.pet_server.model.service;
 
+import com.kt.pet_server.global.base.BaseEntity;
 import com.kt.pet_server.model.enums.PetSize;
 import com.kt.pet_server.model.petsitter.PetSitterProfile;
 import jakarta.persistence.Column;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AvailableSizeMapping {
+public class AvailableSizeMapping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -142,10 +142,13 @@ public class PetSitterController {
     @Operation(summary = "펫시터 서비스 상세 조회")
     @GetMapping("/services/{serviceId}")
     public BaseResponse<ServiceDetailResponse> getService(
+        HttpSession session,
         @PathVariable Long serviceId
     ) {
+        Long sessionMemberId = (Long) session.getAttribute("memberId");
+
         return BaseResponse.onSuccess(
-            "조회 성공", petSitterServiceService.getService(serviceId)
+            "조회 성공", petSitterServiceService.getService(sessionMemberId, serviceId)
         );
     }
 

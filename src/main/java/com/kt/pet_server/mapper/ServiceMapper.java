@@ -5,7 +5,6 @@ import com.kt.pet_server.model.enums.PetSize;
 import com.kt.pet_server.model.enums.ServiceType;
 import com.kt.pet_server.model.petsitter.PetSitterProfile;
 import com.kt.pet_server.model.service.AvailableSizeMapping;
-import com.kt.pet_server.model.service.AvailableTime;
 import com.kt.pet_server.model.service.PetSitterService;
 import com.kt.pet_server.model.service.ServiceTypeMapping;
 import java.time.LocalDateTime;
@@ -30,16 +29,6 @@ public class ServiceMapper {
         return AvailableSizeMapping.builder()
             .size(petSize)
             .petSitterService(petSitterService)
-            .build();
-    }
-
-    public AvailableTime toAvailableTime(
-        PetSitterService service, LocalDateTime startTime, LocalDateTime endTime) {
-        return AvailableTime.builder()
-            .petSitterService(service)
-            .availableDate(startTime.toLocalDate())
-            .startTime(startTime.toLocalTime())
-            .endTime(endTime.toLocalTime())
             .build();
     }
 

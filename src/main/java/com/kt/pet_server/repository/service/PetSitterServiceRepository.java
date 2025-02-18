@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kt.pet_server.model.petsitter.PetSitterProfile;
 import com.kt.pet_server.model.service.PetSitterService;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface PetSitterServiceRepository extends JpaRepository<PetSitterService, Long> {
 
@@ -18,7 +20,14 @@ public interface PetSitterServiceRepository extends JpaRepository<PetSitterServi
 
     List<PetSitterService> findByPetSitter(PetSitterProfile petSitter);
 
-    List<PetSitterService> findByAvailableStartDateBetweenOrderByAvailableStartDate(
-        LocalDate startDate, LocalDate endDate
+    /**
+     * TimeSlot 기준으로 해당 기간에 해당하는 서비스 조회
+     */
+    @Query("SELECT DISTINCT s FROM PetSitterService s " +
+        "JOIN s.timeSlots ts " +
+        "WHERE ts.date BETWEEN :startDate AND :endDate")
+    List<PetSitterService> findByTimeSlotsBetween(
+        @Param("startDate") LocalDate startDate,
+        @Param("endDate") LocalDate endDate
     );
 } 

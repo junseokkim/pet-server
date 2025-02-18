@@ -1,7 +1,9 @@
 package com.kt.pet_server.model.enums;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum ScheduleStatus {
     APPLY("신청"),
